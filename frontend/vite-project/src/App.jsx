@@ -15,27 +15,11 @@ const Lab = (props) => {
   const [hidden, setHidden] = useState("visable");
   const [conversation, setConversation] = useState("")
   const [newToken, setNewToken] = useState("")
-  const [systemMsg, setSystemMsg] = useState("")
   const conversationDid = useRef(false)
   const typing = useRef(false)
   const res = useRef(null)
   const talkTo = useRef(null);
-  useEffect(() => {
-    setInterval(() => {
-      var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
-      ws.onopen = () => ws.send(`[-1, "tick from lab room"]`);
-      var ans = ""
-      ws.onmessage = function (event) {
-        console.log(event.data)
-        if (event.data != "None") {
-          ans+=event.data
-        }
-        else{
-          setSystemMsg(ans)
-        }
-      }
-    }, 60000) 
-  }, [])
+
   useEffect(() => {
     setConversation(conversation + newToken)
     var textarea = document.getElementById('area');
@@ -138,7 +122,7 @@ const Lab = (props) => {
 
         <Form.Control type="text" ref={res} style={{ width: "780px" }} placeholder="Enter Your Response And..." onFocus={() => { typing.current = true }} onBlur={() => { typing.current = false }}></Form.Control>
         <Button style={{ width: "780px" }} onClick={send}>Send</Button>
-        <h2 style={{width:"780px"}}>{systemMsg}</h2>
+        <h2 style={{width:"780px"}}>{props.systemMsg}</h2>
 
       </div>
     </>
@@ -148,16 +132,34 @@ const Lab = (props) => {
 
 function App() {
   const [currentRoom, setCUrrentRoom] = useState("map")
+  const [systemMsg, setSystemMsg] = useState("")
   useEffect(() => {
     fetch("http://127.0.0.1:8000/clearChat", { method: "post" })
 
   }, [])
+  useEffect(() => {
+    setInterval(() => {
+        var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+        ws.onopen = () => ws.send(`[-1, "tick from ${currentRoom}`);
+        var ans = ""
+        ws.onmessage = (event) => {
+            console.log(event.data)
+            if (event.data != "None") {
+                ans += event.data
+            }
+            else {
+                setSystemMsg(ans)
+            }
+        }
+    }, 30000)
+}, [currentRoom])
+
   const mapping = {
-    "lab": <Lab setCUrrentRoom={setCUrrentRoom}></Lab>,
-    "map": <Map setCUrrentRoom={setCUrrentRoom}></Map>,
-    "dining": <Dining setCUrrentRoom={setCUrrentRoom}></Dining>,
-    "CCTV": <CCTV setCUrrentRoom={setCUrrentRoom}></CCTV>,
-    "office": <Office setCUrrentRoom={setCUrrentRoom}></Office>
+    "lab": <Lab systemMsg={systemMsg} setCUrrentRoom={setCUrrentRoom}></Lab>,
+    "map": <Map systemMsg={systemMsg} setCUrrentRoom={setCUrrentRoom}></Map>,
+    "dining": <Dining systemMsg={systemMsg} setCUrrentRoom={setCUrrentRoom}></Dining>,
+    "CCTV": <CCTV systemMsg={systemMsg} setCUrrentRoom={setCUrrentRoom}></CCTV>,
+    "office": <Office systemMsg={systemMsg} setCUrrentRoom={setCUrrentRoom}></Office>
   }
   return mapping[currentRoom]
 }
