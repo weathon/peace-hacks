@@ -6,6 +6,7 @@ from openai import OpenAI
 from datetime import datetime
 from fastapi.responses import HTMLResponse
 import json
+from fastapi.middleware.cors import CORSMiddleware
 
 with open("openai.key","r") as f:
     key = f.read()
@@ -15,10 +16,16 @@ with open("background.txt","r") as f:
 client = OpenAI(api_key=key)
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Story
 background =[
-        {"role": "user", "content":background_text}
+        {"role": "system", "content":background_text}
     ]
 story_process = []
 
@@ -43,24 +50,25 @@ async def websocket_endpoint(websocket: WebSocket):
 
     global story_process
 
-    total_story_process = '.'.join(story_process)
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=background+[
-            {"role": "user", "content": f"Now you are {character}. The previous conversation is {total_story_process}. Now, Alex said {text} to you"}
+        messages=background+story_process+[
+            {"role": "user", "content": f"Now you are {character}. Now, Alex said {text} to you"}
         ],  
         stream=True
     )
 
-    story_process.append("Alex said {text} to {character}")
-
+    story_process.append({"role":"user","content":f"Alex said {text} to {character}"})
+    msg = ""
     for i in response:
         print(i.choices[0].delta.content, end="", flush=True)
+        msg += f"{i.choices[0].delta.content}"
         await websocket.send_text(f"{i.choices[0].delta.content}")
         await asyncio.sleep(0)
     # return response
-    story_process.append("{character} said {response.choices[0].message.content} to Alex ")
+    story_process.append({"role":"assistant","content":f"{character} said {msg} to Alex "})
+    print(story_process)
 
 # Get user inform: time
 @app.get("/time")
@@ -70,6 +78,10 @@ def read_time():
     
     return current_time
 
+@app.post("/clearChat")
+def read_time():
+    global story_process
+    story_process = []
 # Score change
 current_score = 0.0
 
