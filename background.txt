@@ -2,25 +2,36 @@ Screenplay Outline: "Framed Futures: A Sci-Fi Mystery"
 Setting
 The year is 2140, in a technologically advanced high school known for its cutting-edge educational methods and diverse student body. The school is equipped with AI teachers, virtual reality classrooms, and a unique conflict resolution program that emphasizes student autonomy in solving disputes.
 
-Main Characters
-Alex: The protagonist, a bright but misunderstood student who gets falsely accused.
-Jordan: The antagonist, a classmate with a hidden agenda.
+
+Main Characters:
+Alex: The protagonist, a bright but misunderstood student who gets falsely accused. He doesn't have a lot of social connections so most of the people believed in the false accuse.
+Alex is the player and the other characters is the NPC.
+Jordan: The antagonist, a classmate with a hidden agenda with much more social connections and acting as a victim in front of others very well.
 Charlie: A tech-savvy friend of Alex who believes in Alex's innocence.
 Principal Vega: The school's AI principal, programmed to ensure justice and fairness.
-Plot Overview
-Alex finds themselves accused of sabotaging Jordan's science project, an accusation that threatens to ruin Alex's academic future. The truth is, Jordan orchestrated the sabotage against their own project to cover up a more significant misconduct: stealing school technology for personal gain.
+Sabat: A guy met Paxton and heard of the story about Alex. But he is not very sure if the accuse of Alex is true or not. He can be convinced by supporters of Alex to provide clues about the detail of the accession made by Paxton and Jordan. Moreover, if he is fully convinced by Alex or his friends, he can go to the principle Vega's office to be a witness supporting Alex. However, if he is convinced by Jordan or his friends, he can be a negative witness to Alex in front of principle Vega.
+Tibaru: A girl who is the research assistant of Jordan. She knew a part of the fact but she is highly unwilling to be a witness supporting Alex in front of the principle Vega, as she's afraid of losing her job. However, she might be convinced to provide some critical evidence about Jordan's plan.
+Ou Tsi-Ming: A guy working for the school CCTV system who might be convinced by Alex or his friends to give clues about how to hack in the school CCTV system to get some evidence of Jordan destroying his own project.
+Goh Hiuh: A girl eats a lot in the school dining hall. She knows a bunch of people. If she supports either Alex or Jordan, she can make a bunch of people support the one. Characters can chat with Goh Hiuh and be friend with her, which make it possible to convince her.
+
+Plot Overview:
+Alex finds themselves accused of sabotaging Jordan's science project, an accusation that threatens to ruin Alex's academic future. The truth is, Jordan orchestrated the sabotage against their own project to cover up a more significant misconduct: to make Alex got fired so that Jordan can have one less competitor so that Jordan can be the next professor in the department. Jordan destroyed his own project with the help of Tibaru, his research assistant. Then, Jordan tell the school principle that Alex destroyed his project. He also tell his friend Paxton to spread the rumours against Alex so that maybe they can get some public option support. Alex, on the other hand, found themself got accused so he need to firstly find out who accuse him, which is not very hard cause Jordan is Alex competitor and Jordan's friend is spreading runners against Alex.  Alex's friend, Charlie, who believes in Alex, can help to heck the school CCTV but he need to make sure not get caught. If the public option is very negative for Alex, Charlie might also be against by bad rumours.  Alex has 1 month until going to principle Vega's office to show evidence and have witness if possible. Then, Alex's and Jordan's fates will be determined
 
 Interactive Elements & Branches
 Players navigate Alex through a series of rooms and scenarios in the school, gathering clues, confronting characters, and making choices that affect the story's outcome. Each room presents a unique challenge or puzzle, emphasizing conflict resolution skills such as negotiation, empathy, and evidence gathering.
 
-Science Lab: Players investigate the sabotaged project, collecting forensic data that could exonerate Alex.
-Tech Workshop: Players can hack into the school's surveillance system to find evidence of Jordan's whereabouts during the sabotage.
-Debate Club: Alex must engage in a debate, honing their argumentative skills to convince others of their innocence.
-Principal's Office: A crucial scene where players present their findings to Principal Vega, deciding how much evidence to reveal.
-Endings
-Good Ending: If players successfully gather and present enough evidence, Jordan is exposed for their actions, leading to their expulsion. Alex is exonerated, and their reputation is restored.
+Scenes: 
+Principal's Office: A crucial scene where players present their findings to Principal Vega, determining the final decision by Principle Vega.
+
+School dining hall: Every characters can meet all of the other characters there, they can chat with people, making friends with others and convincing people supporting them. The dining hall is really big so usually the two sides will not have fight directly between them, but it might be possible if characters decide to do so.
+
+School CCTV room: if Alex or Charlie convinces Ou Tsi-Ming, who works for school in the CCTV room, to help them. They can sneak into the CCTV room to get some video evidence about Jordan destroyed his own project. Then, Charlie, who is one of the best hacker in school, can hack the CCTV. But random events might happen so that they need to solve them to make the hacking succesful.
+
+Endings:
+Good Ending: If players successfully gather and present enough evidence, Jordan is exposed for their actions, leading to their expulsion. Alex is exonerated, and their reputation is restored. 
 Neutral Ending: If players gather some evidence but not enough to conclusively prove Alex's innocence, Alex faces a temporary suspension. However, doubts about Jordan's integrity lead to an ongoing investigation.
 Bad Ending: If players fail to gather sufficient evidence, Alex is expelled. Jordan's deception remains undiscovered, and Alex must find a new path outside the school.
+Most bad ending: Not only Alex got fired, Charlie also is against by bad rumours by public so Charlie is very sad.
 Conflict Resolution Themes
 Throughout the game, players learn about:
 

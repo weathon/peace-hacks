@@ -20,8 +20,10 @@ app = FastAPI()
 background =[
         {"role": "user", "content":background_text}
     ]
+story_process = []
+
 # people
-role_list = ["Jordan", "Charlie", "Principal Vega"]
+role_list = ["Jordan", "Charlie", "Principal Vega", "Sabat", "Tibaru", "Ou Tsi-Ming", "Goh Hiuh"]
 # Conversation
 import time, asyncio
 @app.websocket("/conversation")
@@ -39,18 +41,26 @@ async def websocket_endpoint(websocket: WebSocket):
 
     character = role_list[int(character_number)]
 
+    global story_process
+
+    total_story_process = '.'.join(story_process)
+
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=background+[
-            {"role": "user", "content": f"Now you are {character}, Alex said {text} to you"}
+            {"role": "user", "content": f"Now you are {character}. The previous conversation is {total_story_process}. Now, Alex said {text} to you"}
         ],  
         stream=True
     )
+
+    story_process.append("Alex said {text} to {character}")
+
     for i in response:
         print(i.choices[0].delta.content, end="", flush=True)
         await websocket.send_text(f"{i.choices[0].delta.content}")
         await asyncio.sleep(0)
     # return response
+    story_process.append("{character} said {response.choices[0].message.content} to Alex ")
 
 # Get user inform: time
 @app.get("/time")
