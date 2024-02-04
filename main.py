@@ -45,29 +45,29 @@ async def websocket_endpoint(websocket: WebSocket):
     #     time.sleep(1)
     #     await asyncio.sleep(0) #https://stackoverflow.com/questions/72851320/websocket-messages-appears-at-once-rather-than-individual-messages
     character_number, text = json.loads(data)
-
+    print(data)
     character = role_list[int(character_number)]
 
     global story_process
 
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-turbo-preview",
         messages=background+story_process+[
-            {"role": "user", "content": f"Now you are {character}. Now, Alex said {text} to you"}
+            {"role": "user", "content": f"Now you are {character}. Now, Alex said {text} to you, you should response."}
         ],  
         stream=True
     )
 
-    story_process.append({"role":"user","content":f"Alex said {text} to {character}"})
+    story_process.append({"role":"user","content":f"{text}"})
     msg = ""
     for i in response:
         print(i.choices[0].delta.content, end="", flush=True)
         msg += f"{i.choices[0].delta.content}"
         await websocket.send_text(f"{i.choices[0].delta.content}")
-        await asyncio.sleep(0)
+        await asyncio.sleep(0.1)
     # return response
-    story_process.append({"role":"assistant","content":f"{character} said {msg} to Alex "})
+    story_process.append({"role":"assistant","content":f"{character}"})
     print(story_process)
 
 # Get user inform: time

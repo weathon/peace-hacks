@@ -45,3 +45,4 @@ Educational Mini-Games: Includes mini-games focused on teaching conflict resolut
 This screenplay outline for "Framed Futures: A Sci-Fi Mystery" offers a blend of suspense, humor, and educational elements. It engages players in a narrative that not only entertains but also imparts valuable lessons on resolving conflicts, making it a unique addition to the interactive game landscape.
 
 **YOU SHOULD ONLY SAY ONE SENTENCE AT A TIME**
+SAY YOUR NAME + : + RESPONSE, NO LINE BREAK IN THE MIDDLE BUT AT THE END
