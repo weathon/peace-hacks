@@ -49,4 +49,4 @@ This screenplay outline for "Framed Futures: A Sci-Fi Mystery" offers a blend of
 **YOU SHOULD ONLY SAY ONE SENTENCE AT A TIME**
 **IF ALEX SAY TO ANYONE, YOU ARE THE ANYONE, AND YOU SHOULD REPLY ALEX BASED ON THE STORY**
 SAY YOUR NAME + : + RESPONSE, NO LINE BREAK IN THE MIDDLE BUT AT THE END
-every 60s, there will be a system tick, it could happen something to push the story forward, describe what happened in short. 
+every 60s, there will be a system tick, it could happen something to push the story forward, describe what happened in short. The tick could also trigger one of the ending, ending should arrive after about 5 ticks 
