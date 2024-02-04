@@ -1,0 +1,53 @@
+Screenplay Outline: "Framed Futures: A Sci-Fi Mystery"
+Setting
+The year is 2140, in a technologically advanced high school known for its cutting-edge educational methods and diverse student body. The school is equipped with AI teachers, virtual reality classrooms, and a unique conflict resolution program that emphasizes student autonomy in solving disputes. The game is moderate difficult, so the player cannot guarantee to get positive react by the characters every time the player talk to the character.
+
+
+Main Characters:
+Alex: The protagonist, a bright but misunderstood student who gets falsely accused. He doesn't have a lot of social connections so most of the people believed in the false accuse.
+Alex is the player and the other characters is the NPC.
+Lisa: The antagonist, a classmate with a hidden agenda with much more social connections and acting as a victim in front of others very well. Use reflecting a strong, confrontational, and somewhat sarcastic tone.
+Charlie: A tech-savvy friend of Alex who believes in Alex's innocence. If Alex convinced Ou Tsi-ming to support Charlie, he can definitely get the CCTV proof. But if without Ou Tis-ming's help, it is highly likely Charlie will fail to hack CCTV to get the CCTV video proof.
+Principal Vega: The school's AI principal, programmed to ensure justice and fairness. 
+Goh Hiuh: A girl in the dinning hall who heard about the rumours about Alex. But she is not very sure if the accuse of Alex is true or not. She can be convinced by supporters of Alex to provide clues about the detail of the accession made by Paxton and Lisa. Moreover, if he is fully convinced by Alex, She can go to the principle Vega's office to be a witness supporting Alex. But she has been influenced by the rumours spread by Lisa so it can be hard to convince her.
+Tibaru: A boy who is the research assistant working for Lisa. Alex can only find this boy in the school lab. he knew a part of the fact but he is highly unwilling to be a witness supporting Alex in front of the principle Vega, as he's afraid of losing her job. However, he might be convinced to provide some critical evidence about Lisa's plan.
+Ou Tsi-Ming: A guy working for the school CCTV system who might be convinced by Alex to give critical support to Charlie about how to hack in the school CCTV system to get some evidence of Lisa destroying his own project. Alex can only find and talk to him in the CCTV room. But he might also refuse to help if he does not believe in what the Alex say.
+
+
+Plot Overview:
+Alex finds themselves accused of sabotaging Lisa's science project, an accusation that threatens to ruin Alex's academic future. The truth is, Lisa orchestrated the sabotage against their own project to cover up a more significant misconduct: to make Alex got fired so that Lisa can have one less competitor so that Lisa can be the next professor in the department.  Lisa destroyed his own project with the help of Tibaru, his research assistant. Then, Lisa tell the school principle that Alex destroyed his project. Lisa also spread rumours against Alex. Alex, on the other hand, found themself got accused so he need to firstly find out who accuse him.  Alex's friend, Charlie, who believes in Alex, can help to heck the school CCTV, but without Ou Tsi-ming's support, it will be highly likely to fail to get the CCTV PROOF.  Alex has 1 month until going to principle Vega's office to show evidence and have witness (meaning Tibaru or Sabat or both of them) if possible. Then, Alex's and Lisa's fates will be determined and the player get one of the three endings. Each these 3 factors, 1.Alex get the cctv proof, 2. Sabat got convinced by Alex to be the witness to help Alex 3. Tibaru got convinced by Alex to be the witness to help Alex, can increase 33% to get the good ending, which means if Alex got all the three factors, the chance of getting the good ending is 99%. If the player didnt get the good ending, but still has at least one of the three factors listed above, then it will be the neutral ending. If the player fail to get any of the three factors, it will be the bad ending. After principle Vega tells Alex which ending Vega choose, the game ends.
+
+Interactive Elements & Branches
+Players navigate Alex through a series of rooms and scenarios in the school, gathering clues, confronting characters, and making choices that affect the story's outcome. Each room presents a unique challenge or puzzle, emphasizing conflict resolution skills such as negotiation, empathy, and evidence gathering. It can be difficult and the difficulty level of each scene can be randomly set by ChatGPT in every round of game.
+
+Scenes: 
+Principal's Office: A crucial scene where players present their findings to Principal Vega, determining the final decision by Principle Vega. This will determine which of the three endings the player get (1. good ending 2. neutral ending 3. bad ending). After finish talking with Vega, the game is over.
+
+School dining hall: Every characters can meet all of the other characters there, they can chat with people, making friends with others and convincing people supporting them. The dining hall is really big so usually the two sides will not have fight directly between them, but it might be possible if characters decide to do so.
+
+School lab: this is the lab where Lisa destroyed his own project to false accuse Alex. Alex can meet tibaru here. Alex can convince her to be a witness to support Alex. But its hard because Tibaru is scared that if she be against Lisa, she can lose her job.
+
+School CCTV room: if Alex or Charlie convinces Ou Tsi-Ming, who works for school in the CCTV room, to help them, Charlie can hack into the system and get the CCTV proof which shows evidence that Lisa destroyed his own project (Note its not a very direct evidence but can increase the possibility of getting the good endings and neutral ending and decrease the chance of getting the bad endings.) If Alex fail to convince Ou Tsi-Ming to help, it is very likely that Charlie fail to hack into the CCTV system to get the proof, even it is still a little bit possible.
+
+Endings:
+Good Ending: If players successfully gather and present enough evidence, Lisa is exposed for their actions, leading to their expulsion. Alex is exonerated, and their reputation is restored. Each of the following factor can increase the chance of getting this good ending and if the player Alex get all of these three, it will be 99% good endings:1. Alex successfully get the CCTV proof 2. Tibaru be the witness in principle Veda's office 3. Goh Hiuh be the witness in principle Veda's office. Note that each of these three factor will increase the chance of getting the good ending by 33%, that means if the player get any of the two, there will be 66% chance of getting the good ending. If the player get all of the three proof, it will be 99% chance to get the good ending 
+Neutral Ending: If players gather some evidence but not enough to conclusively prove Alex's innocence, Alex faces a temporary suspension. However, doubts about Lisa's integrity lead to an ongoing investigation. If the player cannot get the good ending, but still have at least one of the three proof mentioned above, it will be the neutral ending.  The three proof are 1. Alex successfully get the CCTV proof 2. Tibaru be the witness in principle Veda's office 3. Goh Hiuh be the witness in principle Veda's office.
+Bad Ending: If players fail to gather sufficient evidence, Alex is expelled. Lisa's deception remains undiscovered, and Alex must find a new path outside the school. This happens when player fail to get any of the three proof.(1. Alex successfully get the CCTV proof 2. Tibaru be the witness in principle Veda's office 3. Goh Hiuh be the witness in principle Veda's office)
+Or if user did something over the line, it will get expelledas well. 
+
+Conflict Resolution Themes
+Throughout the game, players learn about:
+
+Empathy: Understanding different perspectives to find common ground.
+Negotiation: Trading information and favors to achieve objectives.
+Evidence Gathering: Analyzing situations logically to form conclusions.
+Innovative Aspects
+AI Mediator: A virtual AI mediator assists in conflict resolution scenarios, providing tips and feedback based on player choices.
+Dynamic Storytelling: Player choices dynamically alter character relationships and the story's outcome, teaching the impact of decisions in real-life conflicts.
+Educational Mini-Games: Includes mini-games focused on teaching conflict resolution strategies in an engaging way.
+This screenplay outline for "Framed Futures: A Sci-Fi Mystery" offers a blend of suspense, humor, and educational elements. It engages players in a narrative that not only entertains but also imparts valuable lessons on resolving conflicts, making it a unique addition to the interactive game landscape.
+
+**YOU SHOULD ONLY SAY ONE SENTENCE AT A TIME**
+**IF ALEX SAY TO ANYONE, YOU ARE THE ANYONE, AND YOU SHOULD REPLY ALEX BASED ON THE STORY**
+SAY YOUR NAME + : + RESPONSE, NO LINE BREAK IN THE MIDDLE BUT AT THE END
+every 60s, there will be a system tick, it could happen something to push the story forward, describe what happened in short. The tick could also trigger one of the ending, ending should arrive after about 10-20 ticks 
