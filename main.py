@@ -9,65 +9,36 @@ from datetime import datetime
 
 with open("openai.key","r") as f:
     key = f.read()
+
+with open("background.txt","r") as f:
+    background_text = f.read()
 client = OpenAI(api_key=key)
 
 app = FastAPI()
 
 # Story
 background =[
-        {"role": "user", "content": """Screenplay Outline: "Framed Futures: A Sci-Fi Mystery"
-Setting
-The year is 2140, in a technologically advanced high school known for its cutting-edge educational methods and diverse student body. The school is equipped with AI teachers, virtual reality classrooms, and a unique conflict resolution program that emphasizes student autonomy in solving disputes.
-
-Main Characters
-Alex: The protagonist, a bright but misunderstood student who gets falsely accused.
-Jordan: The antagonist, a classmate with a hidden agenda.
-Charlie: A tech-savvy friend of Alex who believes in Alex's innocence.
-Principal Vega: The school's AI principal, programmed to ensure justice and fairness.
-Plot Overview
-Alex finds themselves accused of sabotaging Jordan's science project, an accusation that threatens to ruin Alex's academic future. The truth is, Jordan orchestrated the sabotage against their own project to cover up a more significant misconduct: stealing school technology for personal gain.
-
-Interactive Elements & Branches
-Players navigate Alex through a series of rooms and scenarios in the school, gathering clues, confronting characters, and making choices that affect the story's outcome. Each room presents a unique challenge or puzzle, emphasizing conflict resolution skills such as negotiation, empathy, and evidence gathering.
-
-Science Lab: Players investigate the sabotaged project, collecting forensic data that could exonerate Alex.
-Tech Workshop: Players can hack into the school's surveillance system to find evidence of Jordan's whereabouts during the sabotage.
-Debate Club: Alex must engage in a debate, honing their argumentative skills to convince others of their innocence.
-Principal's Office: A crucial scene where players present their findings to Principal Vega, deciding how much evidence to reveal.
-Endings
-Good Ending: If players successfully gather and present enough evidence, Jordan is exposed for their actions, leading to their expulsion. Alex is exonerated, and their reputation is restored.
-Neutral Ending: If players gather some evidence but not enough to conclusively prove Alex's innocence, Alex faces a temporary suspension. However, doubts about Jordan's integrity lead to an ongoing investigation.
-Bad Ending: If players fail to gather sufficient evidence, Alex is expelled. Jordan's deception remains undiscovered, and Alex must find a new path outside the school.
-Conflict Resolution Themes
-Throughout the game, players learn about:
-
-Empathy: Understanding different perspectives to find common ground.
-Negotiation: Trading information and favors to achieve objectives.
-Evidence Gathering: Analyzing situations logically to form conclusions.
-Innovative Aspects
-AI Mediator: A virtual AI mediator assists in conflict resolution scenarios, providing tips and feedback based on player choices.
-Dynamic Storytelling: Player choices dynamically alter character relationships and the story's outcome, teaching the impact of decisions in real-life conflicts.
-Educational Mini-Games: Includes mini-games focused on teaching conflict resolution strategies in an engaging way.
-This screenplay outline for "Framed Futures: A Sci-Fi Mystery" offers a blend of suspense, humor, and educational elements. It engages players in a narrative that not only entertains but also imparts valuable lessons on resolving conflicts, making it a unique addition to the interactive game landscape.
-"""
-}
+        {"role": "user", "content":background_text}
     ]
 # people
-role_list = {"Jordan", "Charlie", "Principal Vega"}
+role_list = ["Jordan", "Charlie", "Principal Vega"]
 # Conversation
 @app.get("/conversation")
 def read_root(character_number, text):
     global background
     global role_list
-    character = role_list[character_number]
+    character = role_list[int(character_number)]
 
     response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=background.append[
-        {"role": "user", "content": f"Now you are {character}, Alex said {text} to you"},
-    ]
+        model="gpt-3.5-turbo",
+        messages=background+[
+            {"role": "user", "content": f"Now you are {character}, Alex said {text} to you"}
+        ],
+        stream=True
     )
-    return response
+    for i in response:
+        print(i.choices[0].delta.content, end="", flush=True)
+    # return response
 
 # Get user inform: time
 @app.get("/time")
