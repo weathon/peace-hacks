@@ -33,11 +33,12 @@ def read_root(character_number, text):
         model="gpt-3.5-turbo",
         messages=background+[
             {"role": "user", "content": f"Now you are {character}, Alex said {text} to you"}
-        ],
+        ],  
         stream=True
     )
     for i in response:
         print(i.choices[0].delta.content, end="", flush=True)
+
     # return response
 
 # Get user inform: time
