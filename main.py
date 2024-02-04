@@ -4,8 +4,8 @@ from fastapi import FastAPI, WebSocket
 from pydantic import BaseModel
 from openai import OpenAI
 from datetime import datetime
-
-
+from fastapi.responses import HTMLResponse
+import json
 
 with open("openai.key","r") as f:
     key = f.read()
@@ -23,10 +23,20 @@ background =[
 # people
 role_list = ["Jordan", "Charlie", "Principal Vega"]
 # Conversation
-@app.get("/conversation")
-def read_root(character_number, text):
+import time, asyncio
+@app.websocket("/conversation")
+async def websocket_endpoint(websocket: WebSocket):
     global background
     global role_list
+    await websocket.accept()
+
+    data = await websocket.receive_text()
+    # for i in range(10):
+    #     await websocket.send_text(data)
+    #     time.sleep(1)
+    #     await asyncio.sleep(0) #https://stackoverflow.com/questions/72851320/websocket-messages-appears-at-once-rather-than-individual-messages
+    character_number, text = json.loads(data)
+
     character = role_list[int(character_number)]
 
     response = client.chat.completions.create(
@@ -36,11 +46,10 @@ def read_root(character_number, text):
         ],  
         stream=True
     )
-    async def websocket_endpoint(websocket: WebSocket):
-        await websocket.accept()
-        for i in response:
-            print(i.choices[0].delta.content, end="", flush=True)
-            await websocket.send_text(f"{i.choices[0].delta.content}")
+    for i in response:
+        print(i.choices[0].delta.content, end="", flush=True)
+        await websocket.send_text(f"{i.choices[0].delta.content}")
+        await asyncio.sleep(0)
     # return response
 
 # Get user inform: time
@@ -61,3 +70,39 @@ def change_score(score_change:float):
     
     return current_score
 
+html = """
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+    </head>
+    <body>
+        <h1>WebSocket Chat</h1>
+        <form action="" onsubmit="sendMessage(event)">
+            <input type="text" id="messageText" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+        <ul id='messages'>
+        </ul>
+        <script>
+            var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+            ws.onmessage = function(event) {
+                var messages = document.getElementById('messages')
+                console.log(event.data)
+                messages.innerText+=event.data
+            };
+            function sendMessage(event) {
+                var input = document.getElementById("messageText")
+                ws.send(input.value)
+                input.value = ''
+                event.preventDefault()
+            }
+        </script>
+    </body>
+</html>
+"""
+
+
+@app.get("/web")
+async def get():
+    return HTMLResponse(html)
