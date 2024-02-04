@@ -1,6 +1,6 @@
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 from pydantic import BaseModel
 from openai import OpenAI
 from datetime import datetime
@@ -36,9 +36,11 @@ def read_root(character_number, text):
         ],  
         stream=True
     )
-    for i in response:
-        print(i.choices[0].delta.content, end="", flush=True)
-
+    async def websocket_endpoint(websocket: WebSocket):
+        await websocket.accept()
+        for i in response:
+            print(i.choices[0].delta.content, end="", flush=True)
+            await websocket.send_text(f"{i.choices[0].delta.content}")
     # return response
 
 # Get user inform: time
