@@ -29,8 +29,8 @@ background =[
     ]
 story_process = []
 
-# people
-role_list = ["Jordan", "Charlie", "Principal Vega", "Sabat", "Tibaru", "Ou Tsi-Ming", "Goh Hiuh"]
+# people    
+role_list = ["Lisa", "Charlie", "Principal Vega", "Sabat", "Tibaru", "Ou Tsi-Ming", "Goh Hiuh","System"]
 # Conversation
 import time, asyncio
 @app.websocket("/conversation")
@@ -67,7 +67,7 @@ async def websocket_endpoint(websocket: WebSocket):
         await websocket.send_text(f"{i.choices[0].delta.content}")
         await asyncio.sleep(0.1)
     # return response
-    story_process.append({"role":"assistant","content":f"{character}"})
+    story_process.append({"role":"assistant","content":f"{msg}"})
     print(story_process)
 
 # Get user inform: time
@@ -128,3 +128,8 @@ html = """
 @app.get("/web")
 async def get():
     return HTMLResponse(html)
+
+
+@app.get("/history")
+def history():
+    return story_process
