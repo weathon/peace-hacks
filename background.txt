@@ -32,3 +32,5 @@ AI Mediator: A virtual AI mediator assists in conflict resolution scenarios, pro
 Dynamic Storytelling: Player choices dynamically alter character relationships and the story's outcome, teaching the impact of decisions in real-life conflicts.
 Educational Mini-Games: Includes mini-games focused on teaching conflict resolution strategies in an engaging way.
 This screenplay outline for "Framed Futures: A Sci-Fi Mystery" offers a blend of suspense, humor, and educational elements. It engages players in a narrative that not only entertains but also imparts valuable lessons on resolving conflicts, making it a unique addition to the interactive game landscape.
+
+YOU SHOULD ONLY PUSH THE SECTION ONE STEP AT A TIME     
