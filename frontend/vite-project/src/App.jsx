@@ -122,7 +122,7 @@ const Lab = (props) => {
 
         <Form.Control type="text" ref={res} style={{ width: "780px" }} placeholder="Enter Your Response And..." onFocus={() => { typing.current = true }} onBlur={() => { typing.current = false }}></Form.Control>
         <Button style={{ width: "780px" }} onClick={send}>Send</Button>
-        <h2 style={{width:"780px"}}>{props.systemMsg}</h2>
+        <h2 style={{ width: "780px" }}>{props.systemMsg}</h2>
 
       </div>
     </>
@@ -133,26 +133,39 @@ const Lab = (props) => {
 function App() {
   const [currentRoom, setCUrrentRoom] = useState("map")
   const [systemMsg, setSystemMsg] = useState("")
+  const room = useRef("map")
   useEffect(() => {
     fetch("http://127.0.0.1:8000/clearChat", { method: "post" })
 
   }, [])
+  useEffect(()=>{
+    room.current=currentRoom
+  },[currentRoom])
+
+  const tick =()=>{
+    console.log(room.current)
+    if (room.current == "map") {
+      return
+    }
+    var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+    ws.onopen = () => ws.send(`[-1, "tick from ${room.current}"]`);
+    var ans = ""
+    ws.onmessage = (event) => {
+      console.log(event.data)
+      if (event.data != "None") {
+        ans += event.data
+      }
+      else {
+        setSystemMsg(ans)
+      }
+    }
+  }
+
   useEffect(() => {
-    setInterval(() => {
-        var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
-        ws.onopen = () => ws.send(`[-1, "tick from ${currentRoom}`);
-        var ans = ""
-        ws.onmessage = (event) => {
-            console.log(event.data)
-            if (event.data != "None") {
-                ans += event.data
-            }
-            else {
-                setSystemMsg(ans)
-            }
-        }
-    }, 30000)
-}, [currentRoom])
+      setInterval(()=>{
+        tick()
+      }, 20000)
+  }, [])
 
   const mapping = {
     "lab": <Lab systemMsg={systemMsg} setCUrrentRoom={setCUrrentRoom}></Lab>,
