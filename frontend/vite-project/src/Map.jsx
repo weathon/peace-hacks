@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImageGrid = () => {
+const ImageGrid = (props) => {
   const images = [
     "/lab.png",
     "/dining.png",
@@ -12,7 +12,7 @@ const ImageGrid = () => {
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gap: '10px', // Adjust the gap between images as needed
-    height: '100vh', // Set the height to 100% of the viewport height
+    height: '50vh',
   };
 
   const gridItemStyle = {
@@ -32,14 +32,20 @@ const ImageGrid = () => {
     height: 'auto',
   };
 
+  const room = ["lab", "dining", "CCTV", "office"]
   return (
-    <div style={gridStyle}>
-      {images.map((src, index) => (
-        <div key={index} style={gridItemStyle}>
-          <img src={src} alt={`Image ${index}`} style={imgStyle} />
-        </div>
-      ))}
-    </div>
+    <>
+      <a href="http://127.0.0.1:8000/history">Download Text History</a>
+      In the hushed corridors of academia, where ambition whispers as loudly as scholarship, Alex's future hung by a thread, frayed by an accusation as unexpected as it was severe. A sabotaged science project stood at the heart of the scandal, with evidence pointing squarely at Alex. Yet, beneath the surface of this academic betrayal lay a deeper, more cunning plot orchestrated by Lisa, a rival cloaked in the guise of a colleague. With the clock ticking and alliances in question, Alex's journey to clear their name and uncover the truth begins, setting the stage for a battle of wits and wills within the venerable walls of the university. 
+      <div style={gridStyle}>
+        {images.map((src, index) => (
+          <div key={index} style={gridItemStyle}>
+            <img src={src} onClick={() => {
+              props.setCUrrentRoom(room[index])
+            }} alt={`Image ${index}`} style={imgStyle} />
+          </div>
+        ))}
+      </div ></>
   );
 };
 

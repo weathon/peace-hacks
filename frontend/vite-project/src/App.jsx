@@ -2,35 +2,53 @@ import { BlurFilter, EventSystem, Matrix } from 'pixi.js';
 import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Map from "./Map"
+import Dining from "./Dining"
+import CCTV from "./CCTV"
+import Office from "./Office"
 import 'bootstrap/dist/css/bootstrap.min.css';
-const App = () => {
+const Lab = (props) => {
   const blurFilter = useMemo(() => new BlurFilter(4), []);
   const [background, setBGI] = useState("/lab.png")
   const [x, setX] = useState(0)
   const [y, setY] = useState(512)
-  const [hidden, setHidden] = useState("hidden");
+  const [hidden, setHidden] = useState("visable");
   const [conversation, setConversation] = useState("")
   const [newToken, setNewToken] = useState("")
+  const [systemMsg, setSystemMsg] = useState("")
   const conversationDid = useRef(false)
   const typing = useRef(false)
   const res = useRef(null)
-  useEffect(()=>{
-    fetch("http://127.0.0.1:8000/clearChat",{method:"post"})
-
-  },[])
+  const talkTo = useRef(null);
+  useEffect(() => {
+    setInterval(() => {
+      var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+      ws.onopen = () => ws.send(`[-1, "tick from lab room"]`);
+      var ans = ""
+      ws.onmessage = function (event) {
+        console.log(event.data)
+        if (event.data != "None") {
+          ans+=event.data
+        }
+        else{
+          setSystemMsg(ans)
+        }
+      }
+    }, 60000) 
+  }, [])
   useEffect(() => {
     setConversation(conversation + newToken)
     var textarea = document.getElementById('area');
     textarea.scrollTop = textarea.scrollHeight;
   }, [newToken])
-  const send = (e)=>{
-    setConversation(conversation+"\nAlex: "+res.current.value+"\n")
+  const send = (e) => {
+    setConversation(conversation + "\nAlex: " + res.current.value + "\n")
     var textarea = document.getElementById('area');
     textarea.scrollTop = textarea.scrollHeight;
     var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
-    ws.onopen = () => ws.send(`[1, "${res.current.value}"]`);
+    ws.onopen = () => ws.send(`[${talkTo.current}, "${res.current.value}"]`);
     ws.onmessage = function (event) {
-    res.current.value=""
+      res.current.value = ""
 
       console.log(event.data)
       if (event.data != "None") {
@@ -57,12 +75,28 @@ const App = () => {
     //   setHidden(hidden == "visible" ? "hidden" : "visible")
     //   console.log(hidden)
     // }
-    console.log(conversationDid)
-    if (Math.max(x - 100, y - 100) <= 100 & !conversationDid.current) {
-      setHidden("visible")
+    console.log(x, y)
+    if (Math.max(Math.abs(x - 400), Math.abs(y + 88)) <= 100) {
+      props.setCUrrentRoom("map")
+    }
+    if (Math.max(Math.abs(x + 200), Math.abs(y - 480)) <= 100 & !conversationDid.current) {
       conversationDid.current = true;
       var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
-      ws.onopen = () => ws.send('[1, "hi"]');
+      ws.onopen = () => ws.send('[0, "(Alex walked infront of you)"]');
+      talkTo.current = 0;
+      ws.onmessage = function (event) {
+        console.log(event.data)
+        if (event.data != "None") {
+          setNewToken(event.data)
+        }
+      }
+    }
+    if (Math.max(Math.abs(x - 100), Math.abs(y - 280)) <= 100 & !conversationDid.current) {
+      conversationDid.current = true;
+      var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+      ws.onopen = () => ws.send('[4, "hi"]');
+      talkTo.current = 4;
+
       ws.onmessage = function (event) {
         console.log(event.data)
         if (event.data != "None") {
@@ -84,7 +118,12 @@ const App = () => {
     <>
       <div style={{ background: `url('${background}')`, backgroundRepeat: "no-repeat", width: "1024px", height: "1024px", left: "0px", top: "0px", position: "absolute" }}>
         <div style={{ transform: `translate(100px, 280px)`, textAlign: "center" }}>
+          <b>Tibaru</b>
           <img style={{ height: "100px" }} src="/npc1.png" />
+        </div>
+        <div style={{ transform: `translate(-200px, 480px)`, textAlign: "center" }}>
+          <b>Lisa</b>
+          <img style={{ height: "100px" }} src="/lisa.png" />
         </div>
         <div style={{ transform: `translate(${x}px, ${y}px)`, textAlign: "center" }}>
           <b>Alex</b><br /> <img style={{ width: "50px", height: "100px" }} src="/alex_sad.png" /></div>
@@ -96,13 +135,30 @@ const App = () => {
           </p> */}
           <Form.Control as="textarea" id="area" value={conversation} style={{ color: "black", fontSize: "30px", background: "white", position: "absolute", top: "60px", left: "60px", height: "370px", width: "647px" }}></Form.Control>
         </div>
-       
-          <Form.Control type="text" ref={res} style={{ width: "780px" }} placeholder="Enter Your Response And..." onFocus={() => { typing.current = true }} onBlur={() => { typing.current = false }}></Form.Control>
-          <Button style={{ width: "780px" }} onClick={send}>Send</Button>
-       
+
+        <Form.Control type="text" ref={res} style={{ width: "780px" }} placeholder="Enter Your Response And..." onFocus={() => { typing.current = true }} onBlur={() => { typing.current = false }}></Form.Control>
+        <Button style={{ width: "780px" }} onClick={send}>Send</Button>
+        <h2 style={{width:"780px"}}>{systemMsg}</h2>
+
       </div>
     </>
   );
 };
 
+
+function App() {
+  const [currentRoom, setCUrrentRoom] = useState("map")
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/clearChat", { method: "post" })
+
+  }, [])
+  const mapping = {
+    "lab": <Lab setCUrrentRoom={setCUrrentRoom}></Lab>,
+    "map": <Map setCUrrentRoom={setCUrrentRoom}></Map>,
+    "dining": <Dining setCUrrentRoom={setCUrrentRoom}></Dining>,
+    "CCTV": <CCTV setCUrrentRoom={setCUrrentRoom}></CCTV>,
+    "office": <Office setCUrrentRoom={setCUrrentRoom}></Office>
+  }
+  return mapping[currentRoom]
+}
 export default App;
