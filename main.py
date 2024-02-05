@@ -7,7 +7,7 @@ from datetime import datetime
 from fastapi.responses import HTMLResponse
 import json
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.staticfiles import StaticFiles
 with open("openai.key","r") as f:
     key = f.read()
 
@@ -107,7 +107,7 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+            var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
                 console.log(event.data)
@@ -124,12 +124,20 @@ html = """
 </html>
 """
 
-
-@app.get("/web")
-async def get():
-    return HTMLResponse(html)
-
+app.mount("/", StaticFiles(directory="dist"), name="dist")
 
 @app.get("/history")
 def history():
     return story_process
+
+async def not_found(request, exc):
+    with open("dist/index.html","r") as f:
+        html = f.read()
+    return HTMLResponse(content=html, status_code=exc.status_code)
+
+
+exceptions = {
+    404: not_found,
+}
+
+app = FastAPI(exception_handlers=exceptions)

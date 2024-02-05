@@ -26,7 +26,7 @@ const Dining = (props) => {
         setConversation(conversation + "\nAlex: " + res.current.value + "\n")
         var textarea = document.getElementById('area');
         textarea.scrollTop = textarea.scrollHeight;
-        var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+        var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
         ws.onopen = () => ws.send(`[${talkTo.current}, "${res.current.value}"]`);
         ws.onmessage = function (event) {
             res.current.value = ""
@@ -62,7 +62,7 @@ const Dining = (props) => {
         }
         if (Math.max(Math.abs(x - 300), Math.abs(y - 300)) <= 100 & !conversationDid.current) {
             conversationDid.current = true;
-            var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+            var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
             ws.onopen = () => ws.send('[6, "Hi"]');
             talkTo.current = 6;
 
@@ -75,7 +75,7 @@ const Dining = (props) => {
         }
         if (Math.max(Math.abs(x + 110), Math.abs(y - 500)) <= 100 & !conversationDid.current) {
             conversationDid.current = true;
-            var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+            var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
             ws.onopen = () => ws.send('[1, "Hi"]');
             talkTo.current = 1;
 

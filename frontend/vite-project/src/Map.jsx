@@ -35,7 +35,7 @@ const ImageGrid = (props) => {
   const room = ["lab", "dining", "CCTV", "office"]
   return (
     <>
-      <a href="http://127.0.0.1:8000/history">Download Text History</a>
+      <a href="http://file.weasoft.com:8000/history">Download Text History</a>
       In the hushed corridors of academia, where ambition whispers as loudly as scholarship, Alex's future hung by a thread, frayed by an accusation as unexpected as it was severe. A sabotaged science project stood at the heart of the scandal, with evidence pointing squarely at Alex. Yet, beneath the surface of this academic betrayal lay a deeper, more cunning plot orchestrated by Lisa, a rival cloaked in the guise of a colleague. With the clock ticking and alliances in question, Alex's journey to clear their name and uncover the truth begins, setting the stage for a battle of wits and wills within the venerable walls of the university. 
       <div style={gridStyle}>
         {images.map((src, index) => (

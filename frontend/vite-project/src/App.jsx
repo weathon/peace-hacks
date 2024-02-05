@@ -29,7 +29,7 @@ const Lab = (props) => {
     setConversation(conversation + "\nAlex: " + res.current.value + "\n")
     var textarea = document.getElementById('area');
     textarea.scrollTop = textarea.scrollHeight;
-    var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+    var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
     ws.onopen = () => ws.send(`[${talkTo.current}, "${res.current.value}"]`);
     ws.onmessage = function (event) {
       res.current.value = ""
@@ -65,7 +65,7 @@ const Lab = (props) => {
     }
     if (Math.max(Math.abs(x + 200), Math.abs(y - 480)) <= 100 & !conversationDid.current) {
       conversationDid.current = true;
-      var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+      var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
       ws.onopen = () => ws.send('[0, "(Alex walked infront of you)"]');
       talkTo.current = 0;
       ws.onmessage = function (event) {
@@ -77,7 +77,7 @@ const Lab = (props) => {
     }
     if (Math.max(Math.abs(x - 100), Math.abs(y - 280)) <= 100 & !conversationDid.current) {
       conversationDid.current = true;
-      var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+      var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
       ws.onopen = () => ws.send('[4, "hi"]');
       talkTo.current = 4;
 
@@ -135,7 +135,7 @@ function App() {
   const [systemMsg, setSystemMsg] = useState("")
   const room = useRef("map")
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/clearChat", { method: "post" })
+    fetch("http://file.weasoft.com:8000/clearChat", { method: "post" })
 
   }, [])
   useEffect(()=>{
@@ -147,7 +147,7 @@ function App() {
     if (room.current == "map") {
       return
     }
-    var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
+    var ws = new WebSocket("ws://file.weasoft.com:8000/conversation");
     ws.onopen = () => ws.send(`[-1, "tick from ${room.current}"]`);
     var ans = ""
     ws.onmessage = (event) => {
