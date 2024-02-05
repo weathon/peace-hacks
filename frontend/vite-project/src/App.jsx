@@ -164,7 +164,7 @@ function App() {
   useEffect(() => {
       setInterval(()=>{
         tick()
-      }, 20000)
+      }, 40000)
   }, [])
 
   const mapping = {

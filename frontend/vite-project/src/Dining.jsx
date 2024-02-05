@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const Office = (props) => {
+const Dining = (props) => {
     const blurFilter = useMemo(() => new BlurFilter(4), []);
     const [background, setBGI] = useState("/dining.png")
     const [x, setX] = useState(0)
@@ -63,8 +63,8 @@ const Office = (props) => {
         if (Math.max(Math.abs(x - 300), Math.abs(y - 300)) <= 100 & !conversationDid.current) {
             conversationDid.current = true;
             var ws = new WebSocket("ws://127.0.0.1:8000/conversation");
-            ws.onopen = () => ws.send('[7, "Hi"]');
-            talkTo.current = 7;
+            ws.onopen = () => ws.send('[6, "Hi"]');
+            talkTo.current = 6;
 
             ws.onmessage = function (event) {
                 console.log(event.data)
@@ -128,4 +128,4 @@ const Office = (props) => {
     );
 };
 
-export default Office
+export default Dining
